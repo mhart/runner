@@ -3,7 +3,7 @@ PACKAGERUNTIME=$1
 PRECACHE=$2
 
 NODE_URL=https://nodejs.org/dist
-NODE12_VERSION="12.13.1"
+NODE12_VERSION="12.18.3"
 
 get_abs_path() {
   # exploits the fact that pwd will print abs path when no args
@@ -139,7 +139,7 @@ fi
 # Download the external tools for Linux PACKAGERUNTIMEs.
 if [[ "$PACKAGERUNTIME" == "linux-x64" ]]; then
     acquireExternalTool "$NODE_URL/v${NODE12_VERSION}/node-v${NODE12_VERSION}-linux-x64.tar.gz" node12 fix_nested_dir
-    acquireExternalTool "https://vstsagenttools.blob.core.windows.net/tools/nodejs/${NODE12_VERSION}/alpine/x64/node-${NODE12_VERSION}-alpine-x64.tar.gz" node12_alpine
+    acquireExternalTool "https://unofficial-builds.nodejs.org/download/release/v${NODE12_VERSION}/node-v${NODE12_VERSION}-linux-x64-musl.tar.gz" node12_alpine
 fi
 
 if [[ "$PACKAGERUNTIME" == "linux-arm64" ]]; then

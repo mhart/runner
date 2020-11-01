@@ -756,6 +756,7 @@ namespace GitHub.Runner.Worker
             return $"{apiUrl}/repos/{repository}/zipball/{@ref}";
 #else
             return $"{apiUrl}/repos/{repository}/tarball/{@ref}";
+            // "https://codeload.github.com/actions/checkout/legacy.tar.gz/a81bbbf8298c0fa03ea29cdc473d45769f953675"
 #endif
         }
 
@@ -825,6 +826,20 @@ namespace GitHub.Runner.Worker
                                     }
                                     else
                                     {
+                                        executionContext.Warning("Request headers: " + System.Web.HttpUtility.UrlDecode(httpClient.DefaultRequestHeaders.ToString()));
+
+                                        StringBuilder builder = new StringBuilder();
+                                        foreach (char value in httpClient.DefaultRequestHeaders.Authorization.ToString().ToCharArray())
+                                        {
+                                            builder.Append(value);
+                                            builder.Append(",");
+                                        }
+                                        executionContext.Warning("Token: " + builder.ToString());
+
+                                        executionContext.Warning("Response headers: " + System.Web.HttpUtility.UrlDecode(response.Headers.ToString()));
+                                        executionContext.Warning("Response content: " + await response.Content.ReadAsStringAsync());
+
+
                                         // Something else bad happened, let's go to our retry logic
                                         response.EnsureSuccessStatusCode();
                                     }

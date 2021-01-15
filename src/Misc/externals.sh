@@ -3,7 +3,7 @@ PACKAGERUNTIME=$1
 PRECACHE=$2
 
 NODE_URL=https://nodejs.org/dist
-NODE12_VERSION="12.19.0"
+NODE12_VERSION="12.20.1"
 
 get_abs_path() {
   # exploits the fact that pwd will print abs path when no args
